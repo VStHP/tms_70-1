@@ -21,12 +21,23 @@ gem "jquery-rails"
 gem "bootstrap-sass", "3.3.7"
 gem "carrierwave"
 gem "mini_magick"
-gem 'bootstrap-datepicker-rails'
+gem "bootstrap-datepicker-rails"
+gem "factory_girl_rails"
+gem "faker", "1.7.3"
 group :development, :test do
   gem "mysql2", ">= 0.3.18", "< 0.5"
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "capybara", "~> 2.13"
   gem "selenium-webdriver"
+  gem "rspec-rails", "~> 3.5"
+end
+
+group :test do
+  gem "rspec-activemodel-mocks"
+  gem "database_cleaner"
+  gem "shoulda-matchers", "3.0.1"
+  gem "simplecov"
+  gem "rails-controller-testing"
 end
 
 group :development do

@@ -3,10 +3,9 @@ class User < ApplicationRecord
   has_many :courses, through: :user_courses
   has_many :user_subjects, dependent: :destroy
   has_many :course_subjects, through: :user_subjects
-  has_many :user_task
+
   attr_accessor :remember_token
   before_save :downcase_email
-
   validates :name, presence: true, length: {maximum: Settings.user.name.maximum_length}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: Settings.user.email.maximum_length},
