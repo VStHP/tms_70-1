@@ -8,7 +8,7 @@ FactoryGirl.define do
     university {Faker::University.name}
     organization {Faker::Address.city}
     program {Faker::Team.name}
-    suppervisor 1
+    suppervisor 0
     email { Faker::Internet.email }
   end
 end
