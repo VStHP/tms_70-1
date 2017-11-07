@@ -1,17 +1,17 @@
 class User < ApplicationRecord
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
   has_many :user_courses, dependent: :destroy
   has_many :courses, through: :user_courses
   has_many :user_subjects, dependent: :destroy
   has_many :course_subjects, through: :user_subjects
 
-  attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: {maximum: Settings.user.name.maximum_length}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: Settings.user.email.maximum_length},
   format: {with: VALID_EMAIL_REGEX},
   uniqueness: {case_sensitive: false}
-  has_secure_password
   validates :password, presence: true, length: {minimum: Settings.user.password.minimum_length}, allow_nil: true
   mount_uploader :avatar, AvatarUploader
 
@@ -31,16 +31,7 @@ class User < ApplicationRecord
   end
 
   def create_password_default
-    self.password_digest = User.digest Settings.user.password.default_password
-  end
-
-  def remember
-    self.remember_token = User.new_token
-    update_attributes remember_digest: User.digest(remember_token)
-  end
-
-  def forget
-    update_attributes(remember_digest: nil)
+    self.password = User.digest Settings.user.password.default_password
   end
 
   def authenticated? attribute, token

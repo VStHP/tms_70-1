@@ -22,3 +22,5 @@
 /.rubocop_disabled.yml
 /.rubocop_enabled.yml
 /config/database.yml
+
+/coverage/*

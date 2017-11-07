@@ -5,15 +5,17 @@ module UsersHelper
 
   def displayed_column_for_suppervisor
     User.column_names -
-      %w(id created_at updated_at password_digest avatar reset_digest
-         reset_send_at remember_digest gender) +
+      %w(id reset_password_token reset_password_sent_at sign_in_count current_sign_in_at
+       last_sign_in_at current_sign_in_ip last_sign_in_ip encrypted_password created_at updated_at
+       remember_digest remember_created_at) +
       %w(action)
   end
 
   def displayed_column_for_user
     User.column_names -
-      %w(id created_at suppervisor date_start updated_at password_digest avatar
-         reset_digest reset_send_at remember_digest gender) +
+      %w(id reset_password_token reset_password_sent_at sign_in_count current_sign_in_at
+       last_sign_in_at current_sign_in_ip last_sign_in_ip encrypted_password created_at updated_at
+       remember_digest remember_created_at) +
       %w(action)
   end
 

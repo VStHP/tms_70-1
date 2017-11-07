@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+gem "devise"
 gem "rails", "~> 5.1.4"
 gem "puma", "~> 3.7"
 gem "config"
@@ -37,7 +37,7 @@ group :test do
   gem "rspec-activemodel-mocks"
   gem "database_cleaner"
   gem "shoulda-matchers", "3.0.1"
-  gem "simplecov"
+  gem "simplecov", require: false
   gem "rails-controller-testing"
 end
 

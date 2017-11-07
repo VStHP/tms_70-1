@@ -1,5 +1,5 @@
 <% provide :title, t(".title") %>
-<% if logged_in? %>
+<% if user_signed_in? %>
   <% if suppervisor %>
     <div class="row">
       <h2><%= link_to t("static_pages.home.course"), courses_path %></h2>
@@ -16,6 +16,6 @@
       <a href="http://www.railstutorial.org/"><%= t "static_pages.home.link" %></a>
       <%= t "static_pages.home.outtro" %>
     </h2>
-    <%= link_to t("static_pages.home.login"), login_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to t("static_pages.home.login"), new_user_session_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
