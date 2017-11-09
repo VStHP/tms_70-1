@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
     redirect_to login_url
   end
 
+  rescue_from CanCan::AccessDenied do
+    flash[:warning] = t "cancancan.exception"
+    redirect_to root_path
+  end
+
   def verify_suppervisor
     redirect_to :root unless current_user.suppervisor?
   end

@@ -1,10 +1,11 @@
 class UserCoursesController < ApplicationController
   before_action :logged_in_user
-  before_action :verify_suppervisor
   before_action :check_params, only: %i(create destroy)
   before_action :check_user_course, only: %i(create)
   before_action :check_user_inprogress, only: %i(create)
   before_action :course_finish
+  load_and_authorize_resource
+
   def create
     if @course.have_user @user
       flash[:success] = t "controllers.user_courses.flash_success_create"

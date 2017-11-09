@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: %i(edit update)
   before_action :load_user, only: %i(edit update show)
   before_action :correct_user, only: %i(update)
+  load_and_authorize_resource
 
   def show; end
 

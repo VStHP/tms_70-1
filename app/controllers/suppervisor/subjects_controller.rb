@@ -1,9 +1,9 @@
 class Suppervisor::SubjectsController < ApplicationController
   layout "suppervisor_layout"
   before_action :logged_in_user
-  before_action :verify_suppervisor
   before_action :load_subject, only: %i(show destroy)
   before_action :load_courses, :load_trainers_trainees, :load_tasks, only: %i(show)
+  load_and_authorize_resource
 
   def index
     @subjects = Subject.paginate(page: params[:page], per_page: Settings.per_page.config)
@@ -24,9 +24,14 @@ class Suppervisor::SubjectsController < ApplicationController
   end
 
   def load_trainers_trainees
-    @trainers = @subject.users.with_suppervisor.alphabet_name.paginate(page: params[:page],
+    @course = Course.find_by id: params[:course]
+    unless @course
+      flash[:danger] = t "subjects.show.flash_danger"
+      redirect_to root_path
+    end
+    @trainers = @course.users.with_suppervisor.alphabet_name.paginate(page: params[:page],
       per_page: Settings.per_page.config)
-    @trainees = @subject.users.without_suppervisor.alphabet_name.paginate(page: params[:page],
+    @trainees = @course.users.without_suppervisor.alphabet_name.paginate(page: params[:page],
       per_page: Settings.per_page.config)
   end
 

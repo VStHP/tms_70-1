@@ -233,3 +233,5 @@ en:
     change_pw_1: "New password"
     change_pw_2: "Confirm new password"
     change_pw_sm: "Change my password"
+  cancancan:
+    exception: "Your account unpermitted to do this action"

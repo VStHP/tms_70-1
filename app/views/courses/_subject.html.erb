@@ -12,15 +12,17 @@
       <div class="infor">
         <div>
           <span class="subject-name"><%= link_to subject.name,
-            suppervisor_subject_path(subject) %></span>
+            suppervisor_subject_path(subject, :course => @course) %></span>
         </div>
         <i class="td-subject-description"><%= subject.description %></i>
         <%= form_for (sub_of_course @course, subject) do |f| %>
           <div><%= hidden_field_tag :subject_id, subject.id %></div>
           <div><%= hidden_field_tag :course_id, @course.id %></div>
-          <% check_status_btn @cs %>
-          <div><%= hidden_field_tag :status, @next_status %></div>
-          <%= f.submit t("courses._subject.#{@next_status}"), class: @btn_class %>
+          <% if can? :update, CourseSubject %>
+            <% check_status_btn @cs %>
+            <div><%= hidden_field_tag :status, @next_status %></div>
+            <%= f.submit t("courses._subject.#{@next_status}"), class: @btn_class %>
+          <% end %>
         <% end %>
       </div>
     </div>

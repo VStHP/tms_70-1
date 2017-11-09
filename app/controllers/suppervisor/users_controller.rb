@@ -2,7 +2,7 @@ class Suppervisor::UsersController < ApplicationController
   layout "suppervisor_layout"
   before_action :logged_in_user
   before_action :load_user, except: %i(new index create)
-  before_action :verify_suppervisor
+  load_and_authorize_resource
 
   def show; end
 

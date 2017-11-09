@@ -1,9 +1,10 @@
 class CourseSubjectsController < ApplicationController
   before_action :logged_in_user
-  before_action :verify_suppervisor
   before_action :check_params, only: %i(create destroy update)
   before_action :load_object, only: %i(update destroy)
   before_action :course_finish
+  load_and_authorize_resource
+
   def create
     date = Date.strptime(params[:course_subject][:date_start], "%m/%d/%Y")
     if @course.have @subject, date

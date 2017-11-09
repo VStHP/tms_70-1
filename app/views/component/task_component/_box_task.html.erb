@@ -6,7 +6,9 @@
   </div>
   <div class="box-header with-border">
     <div class="col-md-3">
-      <%= link_to t("tasks.new.btn_add"), "#", onclick: "addTask(); return false", class: "btn btn-block btn-primary" %>
+      <% if can? :create, Task %>
+        <%= link_to t("tasks.new.btn_add"), "#", onclick: "addTask(); return false", class: "btn btn-block btn-primary" %>
+      <% end %>
     </div>
   </div>
   <div class="box-body">
